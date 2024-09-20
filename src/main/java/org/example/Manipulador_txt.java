@@ -1,16 +1,24 @@
 package org.example;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
-class Manipulador_txt {
-    static String directoryPath = "C:\\Users\\luigi.alves\\OneDrive - FUNDAÇÃO MOVIMENTO DIREITO E CIDADANIA\\AED3\\Manipula_arquivos\\Manipulador_arq\\src\\main\\java\\org\\example\\meuArquivo.txt"; // Caminho do diretório
-    static String matriz = "C:\\Users\\luigi.alves\\OneDrive - FUNDAÇÃO MOVIMENTO DIREITO E CIDADANIA\\AED3\\Manipula_arquivos\\Manipulador_arq\\src\\main\\java\\org\\example\\matriz.txt";
+class Manipulador_txt{
+    private static String directoryPath = "C:\\Users\\luigi.alves\\OneDrive - FUNDAÇÃO MOVIMENTO DIREITO E CIDADANIA\\AED3\\Manipula_arquivos\\Manipulador_arq\\src\\main\\java\\org\\example\\meuArquivo.txt"; // Caminho do diretório
+    private static String matriz = "C:\\Users\\luigi.alves\\OneDrive - FUNDAÇÃO MOVIMENTO DIREITO E CIDADANIA\\AED3\\Manipula_arquivos\\Manipulador_arq\\src\\main\\java\\org\\example\\matriz.txt";
+    private BufferedReader bfr; // Este atributo é usado para uma chamada do método lerProximaLinha onde ele sempre irá retornar a próxima linha na leitura
+
+    // Construtor Genérico para a utilização dos métodos da classe onde a leitura do arquivo é fechada após o processamento dos dados
+    public Manipulador_txt(){}
+
     public static void leitor() throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(directoryPath));
+        String linha;
+        while ((linha = buffRead.readLine()) != null) {
+            System.out.println(linha);
+        }
+        buffRead.close();
+    }
+    public static void leitor(String path) throws IOException {
+        BufferedReader buffRead = new BufferedReader(new FileReader(path));
         String linha;
         while ((linha = buffRead.readLine()) != null) {
             System.out.println(linha);
@@ -78,6 +86,18 @@ class Manipulador_txt {
 
         int qunt_zeradas = Integer.parseInt(dados[1]);
         return true;
+    }
+
+    // Construtor para um retorno sequencial de um leitor de arquivo
+    public Manipulador_txt(String path) throws FileNotFoundException {
+        this.bfr = new BufferedReader(new FileReader(path));
+    }
+    public void fechar() throws IOException {
+        bfr.close();
+    }
+
+    public String lerProximaLinha() throws IOException {
+        return bfr.readLine();
     }
 
 

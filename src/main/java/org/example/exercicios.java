@@ -1,6 +1,9 @@
 package org.example;
 import java.util.Scanner;
 import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class exercicios {
     static Scanner input = new Scanner(System.in);
@@ -10,7 +13,7 @@ public class exercicios {
         for (int i = 0; i < inteiros.length; i++){
             String bin = Integer.toBinaryString(inteiros[i]);
             System.out.println("Foi adicionado o "+bin+" ao arquivo");
-            manipulador.escritor(bin);
+            Manipulador_txt.escritor(bin);
 
         }
         System.out.println("todos os numeros foram adicionados com sucesso ! ");
@@ -20,13 +23,13 @@ public class exercicios {
         for(int i = 0;i<5;i++){
             System.out.print("Digite a profissão do funcionário: ");
             String funcionario = input.nextLine();
-            manipulador.escritor(funcionario);
+            Manipulador_txt.escritor(funcionario);
             System.out.print("Digite o tempo de serviço do funcionário (Em meses): ");
             String tempo = input.nextLine();
-            manipulador.escritor(tempo);
+            Manipulador_txt.escritor(tempo);
             i++;
         }
-        manipulador.leitor();
+        Manipulador_txt.leitor();
     }
     static void cadastro_tel() throws IOException{
         String resposta = "";
@@ -36,7 +39,7 @@ public class exercicios {
             System.out.print("Digite o respectivo número: ");
             String numero = input.nextLine();
             String nome_numero = "Nome: "+nome+" Número: "+numero;
-            manipulador.escritor(nome_numero);
+            Manipulador_txt.escritor(nome_numero);
             System.out.println("Digite 0 para interromper a escrita");
 
         }
@@ -45,17 +48,17 @@ public class exercicios {
     public static void maioridade(String saida, String destino)throws IOException{
         boolean loop = true;
         while (loop = true){
-            String linha = manipulador.linha(saida);
+            String linha = Manipulador_txt.linha(saida);
             String nome = linha.split(" ")[0];
             String idade = linha.split(" ")[1];
             int idadenmr = Integer.parseInt(idade);
             if (idadenmr > 18){
                 String linhaDestino = "%s é maior de idade com %d anos".formatted(nome,idadenmr);
-                manipulador.escritor(linhaDestino);
+                Manipulador_txt.escritor(linhaDestino);
             }
             if (idadenmr < 18){
                 String linhaDestino = "%s é menor de idade com %d anos".formatted(nome,idadenmr);
-                manipulador.escritor(linhaDestino);
+                Manipulador_txt.escritor(linhaDestino);
             }
             }
 
@@ -63,7 +66,7 @@ public class exercicios {
         public static void notas(String path)throws IOException{
             boolean loop = true;
             while (loop){
-                String linha = manipulador.linha(path);
+                String linha = Manipulador_txt.linha(path);
                 if (linha == null){
                     break;
                 }
@@ -76,9 +79,10 @@ public class exercicios {
 
 
             }
-
     }
-
+        public static void notas_finais(String path) throws IOException{
+            Manipulador_txt.leitor(path);
+        }
 
 
 
@@ -96,9 +100,26 @@ public class exercicios {
 
         // Exercício 04
         // Função no módulo Manipulador_txt com o nome "Leitura_matriz" e montagem_matriz
+        
+        // Exercício 05
+        // maioridade(null, null);
 
+        // Exercício 06
+        // notas(null);
 
+        // Exercício 07 
+//        Aluno alunos = new Aluno();
+//        System.out.println("Digite o endereço do Arquivo: ");
+//        String path = input.nextLine();
+//        Aluno maior_nota = alunos.encontrarAlunoComMaiorNota(path);
+//        System.out.println("O aluno com maior nota é "+maior_nota);
 
+        // Exercício 08
+        System.out.println("Digite o caminho do arquivo: ");
+        String path = input.nextLine();
+        while(true){
+            String linha = Manipulador_txt.linha(path);
+        }
 
     }
     // função para ordenar vetores do tipo inteiro
@@ -113,7 +134,9 @@ public class exercicios {
                 }
             }
         }
+        return array;
     }
+
 
 
 }
